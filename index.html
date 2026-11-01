@@ -255,23 +255,30 @@ footer p{margin:4px 0;max-width:80ch}
   header.top{padding-top:28px}
   .tree-wrap{width:auto;margin-left:0}
   .axes{grid-template-columns:1fr}
-  .tree-wrap{padding:18px 14px 22px;border-radius:16px}
+  /* phones: the chart becomes a compact outline, the root is implied by the heading */
+  .tree-wrap{padding:10px 10px 14px;border-radius:16px}
   .tree{min-width:0}
-  .tree ul,.tree ul.stack{display:block;padding:0}
+  .tree ul,.tree ul.stack{display:block;margin:0;padding:0}
   .tree ul ul::before,.tree ul.stack::before{display:none}
-  .tree li,.tree ul.stack > li{display:block;padding:10px 0 0 26px}
+  .tree li,.tree ul.stack > li,.tree li:only-child,.tree ul.stack > li:only-child{display:block;min-width:0;padding:8px 0 0}
+  .tree li::before,.tree li::after,.tree ul.stack > li::before,.tree ul.stack > li::after,.tree ul.stack > li:only-child::before{display:none}
   .tree > ul > li{padding:0}
-  .tree li::before,.tree ul.stack > li::before{display:block;top:0;left:8px;right:auto;width:14px;height:calc(10px + 24px);border:0;border-left:1.5px solid var(--line);border-bottom:1.5px solid var(--line);border-radius:0 0 0 10px}
-  .tree li::after,.tree ul.stack > li::after{display:block;top:0;left:8px;bottom:0;width:0;height:auto;border:0;border-left:1.5px solid var(--line);border-radius:0}
-  .tree li:last-child::after{display:none}
-  .tree > ul > li::before,.tree > ul > li::after{display:none}
-  .tree li.has-stack{min-width:0}
-  .tree li.has-stack > .node,.tree li.has-stack > .tog{margin-left:0}
-  .node,.lv-crit > .node,.lv-root > .node{width:100%;max-width:440px;text-align:left}
-  .lv-root > .node{border-radius:16px}
+  .tree > ul > li > .node,.tree > ul > li > .tog{display:none}
+  .tree > ul > li > ul > li:first-child{padding-top:0}
+  .tree > ul > li > ul > li + li{padding-top:14px}
+  .tree ul ul ul{margin-left:12px;padding-left:12px;border-left:2px solid var(--soft)}
+  .tree li.has-stack > .node{margin-left:0}
+  .node,.lv-crit > .node{width:100%;max-width:none;text-align:left;padding:11px 56px 12px 14px;border-radius:12px}
+  .lv-main > .node{border-width:1.5px}
+  .node .en{display:none}
+  .node .t,.lv-sub > .node .t,.lv-low > .node .t{font-size:16.5px}
+  .lv-main > .node .t{font-size:18px}
+  .node .s{font-size:14px;margin-top:3px;color:var(--muted)}
   .node:hover{transform:none;box-shadow:none}
-  .tog{margin-left:14px}
-  .tree li.has-stack > .tog{margin-left:14px}
+  .tog,.tree li.has-stack > .tog{position:absolute;top:17px;right:9px;margin:0;width:36px;height:36px;border:1.5px solid var(--line);border-radius:10px;background:transparent}
+  .tree > ul > li > ul > li:first-child > .tog{top:9px}
+  .tree > ul > li > ul > li + li > .tog{top:23px}
+  .tog svg{width:14px;height:14px}
   .quiz{grid-template-columns:1fr;padding:20px}
   .panel{top:auto;bottom:0;height:88%;width:100%;border-left:0;border-top:1.5px solid var(--soft);border-radius:20px 20px 0 0;transform:translateY(105%)}
   .panel h3{font-size:30px}
