@@ -298,7 +298,7 @@ footer p{margin:4px 0;max-width:80ch}
 
   <div class="axes">
     <div class="axis">
-      <h2>Kdo stojí v čele státu a jak se tam dostal?</h2>
+      <h2>Kdo je formálně hlavou státu?</h2>
       <p>Forma státu</p>
       <div class="pills">
         <button class="pill" data-go="monarchie">Monarchie</button>
@@ -306,7 +306,7 @@ footer p{margin:4px 0;max-width:80ch}
       </div>
     </div>
     <div class="axis">
-      <h2>Kdo skutečně rozhoduje a dá se pokojně vyměnit?</h2>
+      <h2>Kdo má skutečnou moc a mohou ji občané kontrolovat?</h2>
       <p>Politický režim</p>
       <div class="pills">
         <button class="pill" data-go="demokracie">Demokracie</button>
@@ -429,13 +429,14 @@ const TREE = {
  tableTitle:"Obě otázky dohromady",
  notes:["Monarchie neznamená automaticky diktaturu (britský král nevládne) a republika neznamená automaticky demokracii. Severní Korea se oficiálně jmenuje Korejská lidově demokratická republika."],
  kids:[
-  {id:"forma", lv:"crit", t:"Forma státu", en:"form of state", s:"Jak se člověk stane hlavou státu?",
-   lead:"Dělení podle způsobu ustanovování hlavy státu. Říká, kdo stojí v čele státu a jak se tam dostal. Neříká ale nic o tom, jak se ve státě skutečně vládne.",
+  {id:"forma", lv:"crit", t:"Forma státu", en:"form of state", s:"Kdo je formálně hlavou státu?",
+   lead:"Dělení podle způsobu ustanovování hlavy státu. Ptáme se na to, co platí formálně podle ústavy: stojí v čele státu panovník, nebo volený prezident? O tom, kdo ve státě skutečně vládne, forma státu nic neříká.",
    kids:[
     {id:"monarchie", lv:"main", t:"Monarchie", en:"monarchy", s:"úřad hlavy státu je dědičný a doživotní",
      lead:"V čele státu stojí panovník (král, královna, císař, kníže). Úřad je zpravidla dědičný a doživotní. Výjimkou jsou volené monarchie, např. Vatikán, kde papeže volí kardinálové.",
      pros:["panovník stojí nad politickými stranami a může zemi sjednocovat","kontinuita a tradice"],
      cons:["hlava státu není volená a nelze ji vyměnit","v absolutní monarchii nemají občané na vládu žádný vliv"],
+     notes:["Panovník nemusí být dědičný. Papeže volí kardinálové a v Malajsii si devět dědičných sultánů volí ze svého středu krále na pět let. Pořád jde o monarchie: v čele stojí panovník, jehož úřad se neodvozuje od lidu."],
      ex:["Velká Británie","Norsko","Japonsko","Saúdská Arábie"],
      kids:[
       {id:"absolutni", lv:"sub", t:"Absolutní monarchie", en:"absolute monarchy", s:"panovník má neomezenou moc",
@@ -453,10 +454,10 @@ const TREE = {
      list:["<b>přímo občané:</b> Česko (od roku 2013), Francie, Slovensko","<b>parlament</b> nebo zvláštní shromáždění: Německo, Itálie","<b>sbor volitelů</b> zvolený občany: USA"],
      pros:["hlavu státu lze pravidelně vyměnit","o hlavě státu rozhodují občané nebo jejich zástupci"],
      cons:["volba prezidenta může společnost rozdělit","prezident může jednat stranicky"],
-     notes:["Republika neznamená demokracii: i Severní Korea a Bělorusko jsou formálně republiky."],
+     notes:["Hlavou státu nemusí být jeden člověk. Ve Švýcarsku je jí sedmičlenná Spolková rada.","Republika neznamená demokracii. Severní Korea je podle ústavy republika, přestože se v ní moc fakticky dědí v rodině Kimů. Formu státu posuzujeme podle ústavy, skutečnou moc popisuje politický režim."],
      ex:["Česko","USA","Francie","Německo"]}
    ]},
-  {id:"rezim", lv:"crit", t:"Politický režim", en:"political regime", s:"Kdo skutečně rozhoduje?",
+  {id:"rezim", lv:"crit", t:"Politický režim", en:"political regime", s:"Kdo má skutečnou moc?",
    lead:"Dělení podle způsobu vlády: kdo skutečně rozhoduje a zda ho občané mohou pokojně kontrolovat a vyměnit. Mezi demokracií a autokracií není ostrá hranice, leží mezi nimi šedá zóna hybridních režimů.",
    quote:{q:"Nejde hlavně o to, kdo vládne, ale jestli ho umíme pokojně odvolat.",by:"podle Karla Poppera"},
    kids:[
