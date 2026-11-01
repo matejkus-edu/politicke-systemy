@@ -16,6 +16,7 @@
   --sub:#a86400; --sub-bg:#fbf0da; --sub-ink:#7d4a00;
   --low:#6a4bae; --low-bg:#efeafa; --low-ink:#4f348a;
   --ok:#1d7a52; --ok-bg:#e2f3ea; --bad:#b3263a; --bad-bg:#fbe6e9;
+  --r-demo:#1d7a52; --r-lim:#7a9c2e; --r-auth:#c98a00; --r-post:#d0601c; --r-tot:#b3263a; --r-occ:#6b2130;
   --shadow:0 18px 50px -18px rgba(23,34,49,.35);
   --display:"Bricolage Grotesque", "Public Sans", system-ui, sans-serif;
   --body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -30,6 +31,7 @@
     --sub:#e0a646; --sub-bg:#3a2b12; --sub-ink:#f6d9a3;
     --low:#a88cf0; --low-bg:#2b2346; --low-ink:#ddd1ff;
     --ok:#58c493; --ok-bg:#16352a; --bad:#f07a8b; --bad-bg:#3d1c23;
+    --r-demo:#4cc08b; --r-lim:#a9c95a; --r-auth:#f0b53a; --r-post:#f08a4b; --r-tot:#f0697d; --r-occ:#c45a6e;
     --shadow:0 18px 50px -18px rgba(0,0,0,.7);
     color-scheme:dark;
   }
@@ -204,11 +206,51 @@ legend{font-weight:700;margin-bottom:8px}
 .feedback strong{display:block;margin-bottom:2px}
 .linkbtn{background:none;border:0;padding:0;color:var(--crit);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 
+
+/* ---------- Czechoslovak history ---------- */
+.hist-intro{max-width:66ch;margin:0 0 22px}
+.strip-wrap{background:var(--surface);border:1.5px solid var(--soft);border-radius:22px;padding:22px 24px 18px;margin-bottom:22px}
+.strip-title{font-weight:700;margin:0 0 10px}
+.strip{display:flex;height:34px;border-radius:9px;overflow:hidden;gap:2px}
+.strip button{border:0;padding:0;cursor:pointer;min-width:4px;position:relative}
+.strip button:hover{filter:brightness(1.12)}
+.strip button[data-k="lim"]{background-image:repeating-linear-gradient(135deg, transparent 0 6px, rgba(255,255,255,.35) 6px 12px)}
+.ticks{position:relative;height:22px;margin-top:6px;font-size:13px;color:var(--muted)}
+.ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.ticks span:first-child{transform:none}
+.ticks span:last-child{transform:translateX(-100%)}
+.rkey{display:flex;flex-wrap:wrap;gap:6px 16px;list-style:none;margin:14px 0 0;padding:0;font-size:14px;color:var(--muted)}
+.rkey li{display:flex;align-items:center;gap:7px}
+.dot{width:12px;height:12px;border-radius:50%;flex:none;display:inline-block}
+.k-demo{background:var(--r-demo)} .k-lim{background:var(--r-lim)} .k-auth{background:var(--r-auth)} .k-post{background:var(--r-post)} .k-tot{background:var(--r-tot)} .k-occ{background:var(--r-occ)}
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:148px;top:10px;bottom:10px;border-left:2px solid var(--soft)}
+.period{display:grid;grid-template-columns:130px 36px minmax(0,1fr);align-items:start;padding:0 0 18px}
+.period .yrs{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.1;letter-spacing:-.01em;text-align:right;padding-top:16px}
+.period .mark{justify-self:center;margin-top:20px;width:16px;height:16px;border-radius:50%;border:3px solid var(--paper);box-shadow:0 0 0 2px currentColor;background:currentColor;position:relative;z-index:1}
+.period .card{background:var(--surface);border:1.5px solid var(--soft);border-left:6px solid var(--c);border-radius:14px;padding:14px 18px 16px;color:var(--ink)}
+.period h3{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.15;margin:0 0 8px;color:var(--ink)}
+.period dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0 0 10px;font-size:15px}
+.period dt{color:var(--muted)}
+.period dd{margin:0;font-weight:600}
+.period p{margin:0 0 8px;color:var(--ink)}
+.period .aside{font-size:14px;color:var(--muted);margin:0 0 8px}
+.c-demo{--c:var(--r-demo)} .c-lim{--c:var(--r-lim)} .c-auth{--c:var(--r-auth)} .c-post{--c:var(--r-post)} .c-tot{--c:var(--r-tot)} .c-occ{--c:var(--r-occ)}
+.period{color:var(--c)}
+.period.parallel .yrs{font-size:20px}
+
 footer{padding-top:40px;padding-bottom:48px;color:var(--muted);font-size:14px}
 footer p{margin:4px 0;max-width:80ch}
 
 /* ---------- phones & narrow tablets: vertical tree ---------- */
 @media (max-width:820px){
+  .timeline::before{left:7px}
+  .period{grid-template-columns:16px minmax(0,1fr);column-gap:14px}
+  .period .yrs{grid-column:2;text-align:left;padding-top:0;margin-bottom:6px;font-size:21px}
+  .period .mark{grid-column:1;grid-row:1;margin-top:5px}
+  .period .card{grid-column:2}
+  .strip-wrap{padding:18px 16px 14px}
+  .ticks .minor{display:none}
   .wrap{padding:0 16px}
   header.top{padding-top:28px}
   .tree-wrap{width:auto;margin-left:0}
@@ -330,10 +372,33 @@ footer p{margin:4px 0;max-width:80ch}
       </div>
     </div>
   </section>
+
+  <section class="block wrap" aria-labelledby="h-hist">
+    <div class="head">
+      <div>
+        <h2 id="h-hist">Z historie Československa</h2>
+      </div>
+    </div>
+    <p class="hist-intro">Ve 20. století prošlo naše území skoro všemi typy režimů. Formou státu přitom byla skoro po celou dobu republika: měnil se politický režim, ne forma státu. Právě proto se obě otázky rozlišují zvlášť.</p>
+    <div class="strip-wrap">
+      <p class="strip-title">České země 1918 až dnes</p>
+      <div class="strip" id="strip" role="list"></div>
+      <div class="ticks" id="ticks" aria-hidden="true"></div>
+      <ul class="rkey" aria-label="Barvy režimů">
+        <li><span class="dot k-demo"></span>demokracie</li>
+        <li><span class="dot k-lim"></span>omezená demokracie</li>
+        <li><span class="dot k-auth"></span>autoritativní</li>
+        <li><span class="dot k-post"></span>posttotalitní</li>
+        <li><span class="dot k-tot"></span>totalitní</li>
+        <li><span class="dot k-occ"></span>okupace</li>
+      </ul>
+    </div>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
 </main>
 
 <footer class="wrap">
-  <p>Podle handoutu H-GLC 4.3 Formy vlády (politické režimy), Mgr. Matěj Kůs.</p>
+  <p>Podle handoutu H-GLC 4.3 Formy vlády (politické režimy), Mgr. Matěj Kůs. Československé režimy podle J. Bureše, Sto let demokracie v ČR.</p>
   <p>Zařazení států: EIU Democracy Index 2025. Typ autokracie (totalitní, nebo autoritativní) indexy neuvádějí, vychází z odborné literatury (Linz, Friedrich a Brzezinski).</p>
 </footer>
 
@@ -647,11 +712,66 @@ $("qCheck").onclick = ()=>{
   fb.className = "feedback show " + (okF && okR ? "good" : "meh");
   const head = okF && okR ? "Správně." : `${s.n}: ${F_NAME[s.f]}, ${R_NAME[s.r]}.`;
   const targetNode = s.r === "demokracie" ? "demokracie" : s.r;
-  fb.innerHTML = `<strong>${esc(head)}</strong>${esc(s.why)} <button class="linkbtn" data-go="${targetNode}">Otevřít ${esc(byId[targetNode].t.toLowerCase())}</button>`;
+  fb.innerHTML = `<strong>${esc(head)}</strong>${esc(s.why)} <button class="linkbtn" data-go="${targetNode}">Ve schématu: ${esc(byId[targetNode].t.toLowerCase())}</button>`;
   $("qCheck").hidden = true; $("qNext").hidden = false; $("qNext").focus();
 };
 $("qNext").onclick = ()=>{ qi++; ask(); };
 newDeck(); ask();
+
+/* ============ Czechoslovak history ============ */
+const PERIODS = [
+ {id:"p1", from:1918, to:1938, yrs:"1918–1938", k:"demo", t:"První republika", forma:"republika (Československá republika)", rezim:"parlamentní demokracie", go:"demokracie",
+  p:"Svobodné volby, více stran, nezávislé soudy. Prezidenta volilo Národní shromáždění, nejdéle úřadoval T. G. Masaryk."},
+ {id:"p2", from:1938, to:1939, yrs:"1938–1939", k:"auth", t:"Druhá republika", forma:"republika (Česko-Slovenská republika)", rezim:"autoritativní režim", go:"autoritativni",
+  p:"Po Mnichovské dohodě. Strany se sloučily do dvou, omezila se svoboda tisku a vláda mohla vládnout nařízeními místo zákonů."},
+ {id:"p3", from:1939, to:1945, yrs:"1939–1945", k:"occ", t:"Protektorát Čechy a Morava", forma:"okupované území, ne samostatný stát", rezim:"nacistický totalitní režim (okupace)", go:"totalitni",
+  p:"České země okupovalo nacistické Německo. Gestapo, teror, popravy odpůrců a vyvražďování Židů a Romů."},
+ {id:"p3s", from:1939, to:1945, yrs:"1939–1945", k:"auth", t:"Slovenský štát", forma:"formálně republika (Slovenská republika)", rezim:"fašistický autoritativní režim", go:"autoritativni", parallel:true,
+  p:"Satelit nacistického Německa. Vládla jediná strana (Hlinkova slovenská ľudová strana), režim deportoval Židy do vyhlazovacích táborů.",
+  aside:"Souběžně s protektorátem, na území Slovenska."},
+ {id:"p4", from:1945, to:1948, yrs:"1945–1948", k:"lim", t:"Třetí republika", forma:"republika (Československá republika)", rezim:"omezená demokracie", go:"demokracie",
+  p:"Volby se konaly, ale soutěžit směly jen strany Národní fronty, pravicové strany byly zakázány. Komunisté postupně ovládli policii a armádu.",
+  aside:"Někteří politologové (Linz) mluví o pretotalitním režimu: totalita se teprve připravovala."},
+ {id:"p5", from:1948, to:1960, yrs:"1948–1960", k:"tot", t:"Komunistický režim do konce 50. let", forma:"republika (od 1960 Československá socialistická republika)", rezim:"komunistický totalitní režim", go:"totalitni",
+  p:"Komunistický převrat v únoru 1948. Vláda jediné strany, politické procesy a popravy, tábory nucených prací, kolektivizace zemědělství, cenzura."},
+ {id:"p6", from:1960, to:1969, yrs:"60. léta", k:"auth", t:"Uvolňování a Pražské jaro", forma:"republika (ČSSR)", rezim:"komunistický režim, autoritářský", go:"autoritativni",
+  p:"Teror ustoupil a režim se postupně uvolňoval, až po Pražské jaro 1968. Reformy ukončila v srpnu 1968 invaze vojsk Varšavské smlouvy.",
+  aside:"V handoutu tato fáze samostatně není. Zařazení 60. let se mezi autory liší."},
+ {id:"p7", from:1969, to:1989, yrs:"1969–1989", k:"post", t:"Normalizace", forma:"republika (ČSSR)", rezim:"posttotalitní / autoritářský komunistický režim", go:"autoritativni",
+  p:"Návrat tvrdé linie, čistky a cenzura. Masový teror už nebyl, lidé ale museli navenek předstírat souhlas. Václav Havel tomu v Moci bezmocných říká „život ve lži“."},
+ {id:"p8", from:1989, to:2026, yrs:"od 1989", k:"demo", t:"Po sametové revoluci", forma:"republika (ČSFR, od 1993 Česká republika)", rezim:"parlamentní demokracie", go:"parlamentni",
+  p:"Sametová revoluce v listopadu 1989, svobodné volby v roce 1990. Od 1. ledna 1993 samostatná Česká republika."}
+];
+const K_NAME = {demo:"demokracie", lim:"omezená demokracie", auth:"autoritativní režim", post:"posttotalitní režim", tot:"totalitní režim", occ:"okupace, totalitní režim"};
+(function(){
+  const tl = document.getElementById("timeline");
+  tl.innerHTML = PERIODS.map(x=>`
+    <li class="period c-${x.k}${x.parallel?" parallel":""}" id="${x.id}">
+      <div class="yrs">${esc(x.yrs)}</div>
+      <span class="mark" aria-hidden="true"></span>
+      <div class="card">
+        <h3>${esc(x.t)}</h3>
+        ${x.aside && x.parallel ? `<p class="aside">${esc(x.aside)}</p>` : ""}
+        <dl><dt>Forma státu</dt><dd>${esc(x.forma)}</dd><dt>Režim</dt><dd>${esc(x.rezim)}</dd></dl>
+        <p>${esc(x.p)}</p>
+        ${x.aside && !x.parallel ? `<p class="aside">${esc(x.aside)}</p>` : ""}
+        <button class="linkbtn" data-go="${x.go}">Ve schématu: ${esc(byId[x.go].t.replace(/­/g,"").toLowerCase())}</button>
+      </div>
+    </li>`).join("");
+  // strip for the Czech lands (Slovak State runs in parallel, so it is left out of the strip)
+  const START = 1918, END = new Date().getFullYear(), span = END - START;
+  const seg = PERIODS.filter(x=>!x.parallel).map(x=>({...x, to: x.id==="p8" ? END : x.to}));
+  document.getElementById("strip").innerHTML = seg.map(x=>
+    `<button role="listitem" data-k="${x.k}" class="k-${x.k}" style="flex:${Math.max(x.to - x.from, .8)}" aria-label="${esc(x.yrs)}: ${esc(x.t)}, ${esc(K_NAME[x.k])}" title="${esc(x.yrs)}: ${esc(x.t)}" data-jump="${x.id}"></button>`).join("");
+  const ticks = [1918, 1938, 1948, 1968, 1989, END];
+  document.getElementById("ticks").innerHTML = ticks.map(y=>`<span${[1938,1968].includes(y) ? ' class="minor"' : ""} style="left:${(y-START)/span*100}%">${y === END ? "dnes" : y}</span>`).join("");
+  document.getElementById("strip").addEventListener("click", e=>{
+    const b = e.target.closest("[data-jump]"); if (!b) return;
+    const el = document.getElementById(b.dataset.jump);
+    el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+  });
+})();
+
 </script>
 </body>
 </html>
