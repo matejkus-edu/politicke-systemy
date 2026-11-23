@@ -400,13 +400,13 @@ const PRINCIPLES = [
 const prById = Object.fromEntries(PRINCIPLES.map((p,i)=>[p.id, {...p, n:i+1}]));
 
 const MAY = [
- {who:"obcan", q:"Chceš natočit vtipné video o premiérovi a dát ho na internet.", a:"smi", why:"Občan smí vše, co zákon nezakazuje. Vtipkovat o politicích žádný zákon nezakazuje."},
+ {who:"obcan", q:"Chceš natočit vtipné video o premiérovi a dát ho na internet.", a:"smi", why:"Občan smí vše, co zákon nezakazuje. Vtip a satira o politicích jsou chráněné svobodou projevu, pokud například nešíříš o premiérovi nepravdivá a poškozující tvrzení (pomluva)."},
  {who:"stat", q:"Policista chce rozehnat pokojnou demonstraci, protože se mu nelíbí heslo na transparentu.", a:"nesmi", why:"Stát smí jen to, co mu zákon dovoluje. Žádný zákon policii nedovoluje rozehnat pokojné shromáždění kvůli názoru."},
  {who:"obcan", q:"Chceš si obarvit vlasy na zeleno a jít tak ven.", a:"smi", why:"Žádný zákon to nezakazuje, takže nikdo nepotřebuje žádné povolení."},
  {who:"stat", q:"Úřad po tobě chce poplatek, který nestanoví žádný zákon.", a:"nesmi", why:"Daně a poplatky lze ukládat jen na základě zákona (Listina, čl. 11 odst. 5)."},
  {who:"stat", q:"Policista tě požádá o prokázání totožnosti v situaci, kdy mu to zákon o policii výslovně umožňuje.", a:"smi", why:"Stát smí to, co mu zákon dovoluje. Zákon o Policii ČR stanoví, kdy smí policista totožnost vyžadovat."},
- {who:"obcan", q:"Chceš se spolužáky založit spolek fanoušků deskových her.", a:"smi", why:"Listina zaručuje právo svobodně se sdružovat a žádný zákon to nezakazuje."},
- {who:"stat", q:"Ministerstvo chce zakázat prodej knihy, protože kritizuje vládu, ale žádný zákon mu to neumožňuje.", a:"nesmi", why:"Stát smí jen to, co mu zákon dovoluje. Listina navíc říká, že cenzura je nepřípustná (čl. 17 odst. 3)."},
+ {who:"obcan", q:"Chceš se se spolužáky pravidelně scházet v kavárně a hrát deskové hry.", a:"smi", why:"Žádný zákon to nezakazuje. Listina navíc zaručuje právo svobodně se sdružovat."},
+ {who:"stat", q:"Ministerstvo chce zakázat prodej knihy, protože kritizuje vládu, ale žádný zákon mu to neumožňuje.", a:"nesmi", why:"Stát smí jen to, co mu zákon dovoluje. Listina navíc zaručuje svobodu projevu a omezit ji lze jen zákonem (čl. 17)."},
  {who:"obcan", q:"Chceš řídit auto bez řidičského průkazu, protože tě to baví.", a:"nesmi", why:"Občan smí vše, co zákon nezakazuje. Tohle ale zákon zakazuje, takže svoboda tady končí."}
 ];
 
@@ -417,8 +417,8 @@ const BREACH = [
  {q:"Ministr zaplatí z peněz ministerstva reklamní kampaň své strany před volbami.", a:"zneuziti", why:"Veřejné peníze nesmí politik použít pro sebe ani pro svou stranu."},
  {q:"Vládnoucí strana prosadí změnu ústavy, podle které se už nebudou konat volby.", a:"zneuziti", why:"Rušit základy demokracie je nepřípustné (Ústava, čl. 9 odst. 2)."},
  {q:"Úředník odmítne vyřídit žádost, protože žadatel je Rom.", a:"rovnost", why:"Práva platí pro všechny bez rozdílu původu (zákaz diskriminace)."},
- {q:"Bohatý podnikatel dostane za stejný přestupek nižší pokutu, protože zná starostu.", a:"rovnost", why:"Pravidla platí pro všechny stejně bez ohledu na majetek a známosti."},
- {q:"Policie zakáže pokojnou demonstraci, aniž by jí to umožňoval jakýkoli zákon.", a:"zakonnost", why:"Stát smí jen to, co mu zákon dovoluje."},
+ {q:"Bohatý podnikatel dostane za stejný přestupek nižší pokutu, protože zná starostu.", a:"rovnost", why:"Pravidla platí pro všechny stejně bez ohledu na majetek a známosti.", also:"zneuziti"},
+ {q:"Policie rozežene pokojnou demonstraci, i když jí to žádný zákon neumožňuje.", a:"zakonnost", why:"Stát smí jen to, co mu zákon dovoluje."},
  {q:"Úřad pokutuje člověka za to, že nosí klobouk, ačkoli to žádný zákon nezakazuje.", a:"zakonnost", why:"Občan smí vše, co zákon nezakazuje, a stát smí trestat jen tam, kde mu to zákon dovoluje."},
  {q:"Obviněný nesmí mluvit se svým obhájcem a nedozví se, jaké důkazy proti němu soud má.", a:"soudy", why:"Každý má právo na obhajobu a spravedlivý proces."},
  {q:"Premiér zavolá soudci a naznačí mu, jak má rozhodnout v kauze jeho přítele.", a:"soudy", why:"Soudci mají rozhodovat nestranně a bez nátlaku politiků.", also:"delba"}
