@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Právní stát</title>
+<meta name="description" content="Interaktivní přehled: rule by law a rule of law, co smí stát a co občan, šest principů právního státu s příklady a ukotvením v Ústavě ČR. H-GLC 4.2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3f5f8; --surface:#ffffff; --ink:#172231; --muted:#566275; --line:#a3adbb; --soft:#e3e8ef;
+  --crit:#2d6cb5; --crit-bg:#e4eef9; --crit-ink:#173f6e;
+  --low:#6a4bae; --low-bg:#efeafa; --low-ink:#4f348a;
+  --ok:#1d7a52; --ok-bg:#e2f3ea; --bad:#b3263a; --bad-bg:#fbe6e9; --warn:#a86400; --warn-bg:#fbf0da;
+  --shadow:0 18px 50px -18px rgba(23,34,49,.35);
+  --display:"Bricolage Grotesque", "Public Sans", system-ui, sans-serif;
+  --body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#111821; --surface:#18212d; --ink:#e7ecf3; --muted:#a2adbd; --line:#4c5868; --soft:#263241;
+    --crit:#6aa5ea; --crit-bg:#18304d; --crit-ink:#cfe3fb;
+    --low:#a88cf0; --low-bg:#2b2346; --low-ink:#ddd1ff;
+    --ok:#58c493; --ok-bg:#16352a; --bad:#f07a8b; --bad-bg:#3d1c23; --warn:#e0a646; --warn-bg:#3a2b12;
+    --shadow:0 18px 50px -18px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--body)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--crit);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+/* ---------- site navigation ---------- */
+nav.site{border-bottom:1.5px solid var(--soft);background:var(--surface)}
+nav.site .wrap{display:flex;flex-wrap:wrap;gap:6px;padding-top:10px;padding-bottom:10px}
+nav.site a{color:var(--muted);text-decoration:none;font-weight:600;font-size:15px;padding:7px 13px;border-radius:9px}
+nav.site a:hover{color:var(--ink);background:var(--paper)}
+nav.site a[aria-current="page"]{color:var(--paper);background:var(--ink)}
+nav.site a span{font-weight:400;opacity:.75;margin-right:6px}
+
+/* ---------- header & shared blocks ---------- */
+header.top{padding-top:44px;padding-bottom:8px}
+.course{font-size:14px;color:var(--muted);margin:0 0 10px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(44px,7vw,84px);line-height:.95;letter-spacing:-.02em;margin:0 0 18px}
+.lead{max-width:62ch;font-size:18px;color:var(--muted);margin:0}
+section.block{padding-top:44px;padding-bottom:8px}
+.head{margin-bottom:18px}
+.head h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.015em;line-height:1.05;margin:0}
+.head p{margin:8px 0 0;color:var(--muted);max-width:66ch}
+.card{background:var(--surface);border:1.5px solid var(--soft);border-radius:22px;padding:26px 28px}
+.note{border-left:4px solid var(--crit);background:var(--crit-bg);color:var(--ink);border-radius:0 10px 10px 0;padding:11px 14px;margin:14px 0}
+.linkbtn{background:none;border:0;padding:0;color:var(--crit);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.law{font-family:var(--display);font-size:19px;line-height:1.35;margin:0}
+.law small{display:block;font-family:var(--body);font-size:13.5px;color:var(--muted);margin-top:4px}
+
+/* ---------- 1. rule by law vs rule of law ---------- */
+.versus{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.claim{font-family:var(--display);font-weight:700;font-size:clamp(24px,2.6vw,32px);line-height:1.15;letter-spacing:-.01em;margin:0 0 6px}
+.claim + p{margin:0 0 20px;color:var(--muted)}
+.seg{display:inline-flex;background:var(--paper);border:1.5px solid var(--soft);border-radius:12px;padding:4px;gap:4px;margin-bottom:20px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;border-radius:9px;padding:9px 16px;font-weight:700;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.stack{position:relative;height:310px}
+.blk{position:absolute;border-radius:14px;padding:12px 16px;border:2px solid var(--ink);background:var(--surface);transition:top .5s cubic-bezier(.4,0,.2,1), left .5s cubic-bezier(.4,0,.2,1), width .5s cubic-bezier(.4,0,.2,1), transform .5s}
+.blk b{display:block;font-family:var(--display);font-size:20px;line-height:1.15}
+.blk span{display:block;font-size:14.5px;color:var(--muted);line-height:1.35;margin-top:2px}
+.blk.law-b{border-color:var(--crit);background:var(--crit-bg)}
+.blk.law-b b{color:var(--crit-ink)}
+.blk.ruler{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.blk.ruler span{color:inherit;opacity:.75}
+.stack[data-mode="by"] .ruler{top:0;left:20%;width:60%}
+.stack[data-mode="by"] .law-b{top:108px;left:30%;width:40%;transform:rotate(-2deg)}
+.stack[data-mode="by"] .people{top:216px;left:0;width:100%}
+.stack[data-mode="of"] .law-b{top:0;left:0;width:100%;transform:none}
+.stack[data-mode="of"] .ruler{top:150px;left:0;width:48.5%}
+.stack[data-mode="of"] .people{top:150px;left:51.5%;width:48.5%}
+.stem{position:absolute;top:78px;height:66px;width:2px;background:var(--crit);opacity:0;transition:opacity .3s}
+.stem::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top:8px solid var(--crit);border-bottom:0}
+.stem.l{left:24%} .stem.r{left:76%}
+.stem-label{position:absolute;top:98px;left:50%;transform:translateX(-50%);font-size:14px;font-weight:700;color:var(--crit);white-space:nowrap;opacity:0;transition:opacity .3s}
+.stack[data-mode="of"] .stem,.stack[data-mode="of"] .stem-label{opacity:1;transition-delay:.35s}
+.explain h3{font-family:var(--display);font-weight:800;font-size:28px;margin:0}
+.explain .en{font-style:italic;color:var(--muted);margin:0 0 12px}
+.explain p{margin:0 0 12px}
+.explain .short{font-family:var(--display);font-weight:700;font-size:21px;margin:14px 0 0}
+.explain .swap{animation:swap .3s ease-out}
+@keyframes swap{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.constitution{margin-top:20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center}
+.constitution .mark{font-family:var(--display);font-weight:800;font-size:44px;line-height:1;color:var(--crit)}
+
+/* ---------- 2. state vs citizen ---------- */
+.sc{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.side h3{font-family:var(--display);font-weight:800;font-size:26px;margin:0 0 2px}
+.side .rule{font-size:18px;margin:0 0 16px;min-height:3.2em}
+.field{position:relative;height:190px;border-radius:16px;overflow:hidden;border:1.5px solid var(--soft)}
+.field.state{background:repeating-linear-gradient(135deg, var(--soft) 0 10px, transparent 10px 20px), var(--paper)}
+.field.citizen{background:var(--ok-bg)}
+.island{position:absolute;border-radius:40% 55% 45% 50%;display:grid;place-items:center;text-align:center;font-weight:700;font-size:14px;padding:8px}
+.field.state .island{background:var(--ok-bg);border:2px solid var(--ok);color:var(--ok);left:50%;top:50%;width:62%;height:62%;transform:translate(-50%,-50%)}
+.field.citizen .island{background:var(--bad-bg);border:2px solid var(--bad);color:var(--bad);width:28%;height:34%;font-size:13px}
+.field .bg-label{position:absolute;left:12px;bottom:8px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.field.citizen .bg-label{color:var(--ok)}
+.side .src{margin-top:12px}
+.freedom{font-family:var(--display);font-size:clamp(20px,2.2vw,26px);font-weight:700;line-height:1.25;margin:20px 0 0;max-width:46ch}
+
+/* quizzes */
+.quiz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:28px;margin-top:20px}
+.q-meta{color:var(--muted);margin:0}
+.who{display:inline-block;font-size:13.5px;font-weight:700;border-radius:999px;padding:3px 11px;margin-top:8px}
+.who.stat{background:var(--ink);color:var(--paper)}
+.who.obcan{background:var(--ok-bg);color:var(--ok)}
+.q-text{font-family:var(--display);font-weight:700;font-size:clamp(23px,2.6vw,32px);line-height:1.2;letter-spacing:-.01em;margin:10px 0}
+.score{display:flex;gap:16px;margin-top:18px;font-size:15px;color:var(--muted)}
+.score b{font-family:var(--display);font-size:28px;color:var(--ink);display:block;line-height:1}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;text-align:left}
+.opt:hover{border-color:var(--ink)}
+.opts.big .opt{font-size:18px;padding:12px 22px}
+.opt.right{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.opt.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.primary{border:0;background:var(--ink);color:var(--paper);border-radius:10px;padding:11px 18px;font-weight:700;cursor:pointer}
+.feedback{margin-top:12px;border-radius:12px;padding:12px 14px;display:none}
+.feedback.show{display:block}
+.feedback.good{background:var(--ok-bg)} .feedback.meh{background:var(--bad-bg)}
+.feedback strong{display:block;margin-bottom:2px}
+.q-actions{margin-top:12px}
+
+/* ---------- 3. principles ---------- */
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:p;margin:0;padding:0;list-style:none}
+.pr{height:100%;width:100%;text-align:left;cursor:pointer;background:var(--surface);border:1.5px solid var(--soft);border-radius:16px;padding:18px 18px 16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-content:start;transition:transform .15s, box-shadow .15s}
+.pr:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.pr .n{grid-row:1 / span 3;font-family:var(--display);font-weight:800;font-size:40px;line-height:.9;color:var(--crit)}
+.pr .t{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.15}
+.pr .en{font-size:13.5px;font-style:italic;color:var(--muted)}
+.pr .s{font-size:15px;line-height:1.4;margin-top:6px}
+
+/* sources */
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;list-style:none;margin:0;padding:0}
+.links a{display:block;height:100%;text-decoration:none;color:var(--ink);background:var(--surface);border:1.5px solid var(--soft);border-radius:16px;padding:16px 18px}
+.links a:hover{border-color:var(--ink)}
+.links b{display:block;font-family:var(--display);font-size:19px;margin-bottom:4px}
+.links span{display:block;font-size:14.5px;color:var(--muted)}
+.next{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:22px;text-decoration:none;color:var(--paper);background:var(--ink);border-radius:18px;padding:20px 24px}
+.next small{display:block;opacity:.75;font-size:14px}
+.next b{font-family:var(--display);font-size:26px}
+.next:hover{filter:brightness(1.15)}
+
+/* ---------- detail panel ---------- */
+.panel{position:fixed;top:0;right:0;height:100%;width:min(540px,100%);visibility:hidden;background:var(--surface);color:var(--ink);box-shadow:var(--shadow);border-left:1.5px solid var(--soft);transform:translateX(105%);transition:transform .28s ease, visibility 0s linear .28s;z-index:20;display:flex;flex-direction:column}
+.panel.open{transform:none;visibility:visible;transition:transform .28s ease}
+.panel .body:focus{outline:none}
+.panel .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 12px;border-bottom:1.5px solid var(--soft)}
+.panel .bar p{margin:0;font-size:13.5px;color:var(--muted)}
+.x{flex:none;width:38px;height:38px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;display:grid;place-items:center}
+.x:hover{border-color:var(--ink)}
+.panel .body{overflow-y:auto;padding:22px 24px 40px}
+.badge{display:inline-flex;font-size:13.5px;font-weight:600;border-radius:999px;padding:3px 11px;border:1.5px solid var(--crit);background:var(--crit-bg);color:var(--crit-ink)}
+.panel h3{font-family:var(--display);font-weight:800;font-size:32px;line-height:1.05;letter-spacing:-.015em;margin:14px 0 2px}
+.panel .en{font-style:italic;color:var(--muted);margin:0 0 14px}
+.panel .p-lead{font-size:17px;margin:0 0 18px}
+.panel h4{font-family:var(--display);font-weight:700;font-size:19px;margin:24px 0 8px}
+.example{border-radius:12px;padding:12px 14px;background:var(--ok-bg)}
+.example p{margin:0}
+.lawbox{border-left:4px solid var(--crit);padding:4px 0 4px 14px}
+.lawbox .law{font-size:17.5px}
+.pnav{display:flex;justify-content:space-between;gap:10px;margin-top:28px}
+.pnav button{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;cursor:pointer;font-weight:600}
+.pnav button:hover{border-color:var(--ink)}
+.scrim{position:fixed;inset:0;background:rgba(10,16,24,.35);opacity:0;pointer-events:none;transition:opacity .25s;z-index:15}
+.scrim.on{opacity:1;pointer-events:auto}
+@media (min-width:1100px){.scrim{display:none}}
+
+footer{padding-top:44px;padding-bottom:48px;color:var(--muted);font-size:14px}
+footer p{margin:4px 0;max-width:80ch}
+
+@media (max-width:1020px){
+  .versus,.quiz{grid-template-columns:1fr}
+  .principles,.links{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+  .wrap{padding:0 16px}
+  header.top{padding-top:28px}
+  .card{padding:20px 18px;border-radius:18px}
+  .sc{grid-template-columns:1fr}
+  .side .rule{min-height:0}
+  .principles,.links{grid-template-columns:1fr}
+  .stack{height:330px}
+  .stack[data-mode="by"] .ruler{left:8%;width:84%}
+  .stack[data-mode="by"] .law-b{top:112px;left:18%;width:64%}
+  .stack[data-mode="by"] .people{top:224px}
+  .stack[data-mode="of"] .ruler,.stack[data-mode="of"] .people{top:128px}
+  .stack[data-mode="of"] .ruler{width:48%} .stack[data-mode="of"] .people{left:52%;width:48%}
+  .blk{padding:10px 12px}
+  .stem{top:70px;height:52px}
+  .stem-label{top:84px;font-size:13px}
+  .blk b{font-size:18px}
+  .blk span{font-size:13.5px}
+  .pr:hover{transform:none;box-shadow:none}
+  .panel{top:auto;bottom:0;height:88%;width:100%;border-left:0;border-top:1.5px solid var(--soft);border-radius:20px 20px 0 0;transform:translateY(105%)}
+  .panel h3{font-size:28px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Stránky">
+  <div class="wrap">
+    <a href="stat.html"><span>4.1</span>Stát a jeho funkce</a>
+    <a href="pravni-stat.html" aria-current="page"><span>4.2</span>Právní stát</a>
+    <a href="./"><span>4.3</span>Formy vlády</a>
+  </div>
+</nav>
+
+<header class="top wrap">
+  <p class="course">H-GLC, blok Demokracie a právní stát, hodina 4.2</p>
+  <h1>Právní stát</h1>
+  <p class="lead">Zákony má skoro každý stát. Právní stát je ten, ve kterém zákony platí i pro ty, kdo vládnou. Klikni na princip a otevře se jeho příklad a místo v Ústavě.</p>
+</header>
+
+<main>
+  <!-- 1. rule by law vs rule of law -->
+  <section class="block wrap" aria-labelledby="h-rule">
+    <div class="head"><h2 id="h-rule">Rule by law, nebo rule of law?</h2></div>
+    <div class="versus">
+      <div class="card">
+        <p class="claim">Rozhodující je, kdo stojí nad kým.</p>
+        <p>Zákony má téměř každý stát, i diktatura. Jde o to, jestli stojí vládce nad právem, nebo právo nad vládcem.</p>
+        <div class="seg" role="group" aria-label="Přepnout model">
+          <button data-mode="by" aria-pressed="true">Rule by law</button>
+          <button data-mode="of" aria-pressed="false">Rule of law</button>
+        </div>
+        <div class="stack" id="stack" data-mode="by" aria-hidden="true">
+          <div class="blk ruler"><b>Ti, kdo vládnou</b><span id="bRuler"></span></div>
+          <div class="blk law-b"><b>Zákony</b><span id="bLaw"></span></div>
+          <div class="blk people"><b>Občané</b><span id="bPeople"></span></div>
+          <span class="stem l"></span><span class="stem r"></span><span class="stem-label">platí pro všechny</span>
+        </div>
+      </div>
+      <div class="card explain" aria-live="polite" id="explain"></div>
+    </div>
+    <div class="card constitution">
+      <span class="mark" aria-hidden="true">čl. 1</span>
+      <p class="law">„Česká republika je svrchovaný, jednotný a demokratický právní stát…“<small>Ústava ČR, čl. 1 odst. 1. Česko se k právnímu státu hlásí hned v prvním článku.</small></p>
+    </div>
+  </section>
+
+  <!-- 2. state vs citizen -->
+  <section class="block wrap" aria-labelledby="h-sc">
+    <div class="head">
+      <h2 id="h-sc">Co smí stát a co občan</h2>
+      <p>Důležitý rozdíl mezi státem a občanem stanoví Ústava ČR v čl. 2 odst. 3 a 4.</p>
+    </div>
+    <div class="sc">
+      <div class="card side">
+        <h3>Stát</h3>
+        <p class="rule">smí jen to, co mu zákon dovoluje.</p>
+        <div class="field state" role="img" aria-label="Velká plocha zakázaného, uvnitř ostrov toho, co zákon státu dovoluje">
+          <div class="island">co zákon dovoluje</div>
+          <span class="bg-label">všechno ostatní nesmí</span>
+        </div>
+        <p class="law src">„Státní moc slouží všem občanům a lze ji uplatňovat jen v případech, v mezích a způsoby, které stanoví zákon.“<small>Ústava ČR, čl. 2 odst. 3</small></p>
+      </div>
+      <div class="card side">
+        <h3>Občan</h3>
+        <p class="rule">smí vše, co zákon nezakazuje, a nikdo ho nesmí nutit dělat, co zákon neukládá.</p>
+        <div class="field citizen" role="img" aria-label="Velká plocha dovoleného, uvnitř několik ostrůvků toho, co zákon zakazuje">
+          <div class="island" style="left:10%;top:14%">zakázáno zákonem</div>
+          <div class="island" style="left:58%;top:40%">zakázáno zákonem</div>
+          <span class="bg-label">všechno ostatní smí</span>
+        </div>
+        <p class="law src">„Každý občan může činit, co není zákonem zakázáno, a nikdo nesmí být nucen činit, co zákon neukládá.“<small>Ústava ČR, čl. 2 odst. 4</small></p>
+      </div>
+    </div>
+    <p class="freedom">Svoboda je tedy výchozí stav a státní moc je výjimka, kterou musí vždy podpírat zákon.</p>
+
+    <div class="card quiz" id="quizA">
+      <div>
+        <p class="q-meta">Smí, nebo nesmí? <span data-count></span></p>
+        <span class="who" data-who></span>
+        <p class="q-text" data-q></p>
+        <div class="score" aria-live="polite"><div><b data-right>0</b>správně</div><div><b data-done>0</b>hotovo</div></div>
+      </div>
+      <div>
+        <div class="opts big" data-opts>
+          <button class="opt" data-v="smi">Smí</button>
+          <button class="opt" data-v="nesmi">Nesmí</button>
+        </div>
+        <div class="feedback" data-fb aria-live="polite"></div>
+        <div class="q-actions"><button class="primary" data-next hidden>Další situace</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. six principles -->
+  <section class="block wrap" aria-labelledby="h-pr">
+    <div class="head">
+      <h2 id="h-pr">6 principů právního státu</h2>
+      <p>Podle Evropské komise se v právním státu veškerá veřejná moc vykonává v mezích zákona, v souladu s demokratickými hodnotami a základními právy a pod kontrolou nezávislých a nestranných soudů. Zkráceně: nikdo není nad zákonem.</p>
+    </div>
+    <ol class="principles" id="principles"></ol>
+
+    <div class="card quiz" id="quizB">
+      <div>
+        <p class="q-meta">Který princip byl porušen? <span data-count></span></p>
+        <p class="q-text" data-q></p>
+        <div class="score" aria-live="polite"><div><b data-right>0</b>správně</div><div><b data-done>0</b>hotovo</div></div>
+      </div>
+      <div>
+        <div class="opts" data-opts></div>
+        <div class="feedback" data-fb aria-live="polite"></div>
+        <div class="q-actions"><button class="primary" data-next hidden>Další situace</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. further reading -->
+  <section class="block wrap" aria-labelledby="h-more">
+    <div class="head"><h2 id="h-more">Doplňující zdroje</h2></div>
+    <ul class="links">
+      <li><a href="https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/upholding-rule-law/rule-law/what-rule-law_cs" target="_blank" rel="noopener"><b>Co je právní stát</b><span>Evropská komise, česky</span></a></li>
+      <li><a href="https://fra.europa.eu/sites/default/files/fra_uploads/rule_of_law_explained_-_map.pdf" target="_blank" rel="noopener"><b>The Rule of Law and Why It Matters</b><span>Agentura EU pro základní práva (FRA), anglicky, PDF</span></a></li>
+      <li><a href="https://worldjusticeproject.org/rule-of-law-index/" target="_blank" rel="noopener"><b>WJP Rule of Law Index</b><span>World Justice Project, srovnání států světa, anglicky</span></a></li>
+    </ul>
+    <a class="next" href="./"><span><small>Pokračuj na hodinu 4.3</small><b>Formy vlády</b></span><span aria-hidden="true" style="font-size:28px">›</span></a>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Podle handoutu a pracovního listu H-GLC 4.2 Principy právního státu, Mgr. Matěj Kůs.</p>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="panel" id="panel" aria-labelledby="pTitle" aria-hidden="true">
+  <div class="bar">
+    <p>6 principů právního státu</p>
+    <button class="x" id="pClose" aria-label="Zavřít">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="body" id="pBody" tabindex="-1"></div>
+</aside>
+
+<script>
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+
+/* ============ content (handout and worksheet H-GLC 4.2) ============ */
+const MODES = {
+ by:{t:"Rule by law", en:"vláda pomocí práva",
+   ruler:"stojí nad zákony: mění je, ohýbá nebo nedodržuje", law:"nástroj v rukou vládnoucích", people:"zákony platí hlavně pro ně",
+   text:["Právo je nástroj v rukou vládnoucích. Zákony platí pro ostatní, ale vládce si je může libovolně měnit, ohýbat nebo je nedodržovat.","Zákony a soudy formálně existují, ale moc stojí nad nimi. Tak fungují autoritativní a hybridní režimy."],
+   short:"Moc stojí nad právem."},
+ of:{t:"Rule of law", en:"vláda práva, právní stát",
+   ruler:"musí dodržovat zákony jako všichni ostatní", law:"platí pro všechny, i pro ty, kdo vládnou", people:"mají stejná práva a povinnosti",
+   text:["Právu podléhají všichni, i ti, kdo vládnou.","Veřejná moc se vykonává v mezích zákona, v souladu s demokratickými hodnotami a základními právy a pod kontrolou nezávislých a nestranných soudů."],
+   short:"Nikdo není nad zákonem."}
+};
+
+const PRINCIPLES = [
+ {id:"zakonnost", t:"Zákonnost", alt:"Legalita", en:"legality",
+  s:"Státní moc je vázána zákonem.",
+  lead:"Státní moc je vázána zákonem: stát smí dělat jen to, co mu zákon dovoluje, zatímco občan vše, co zákon nezakazuje.",
+  ex:"Občané mohou pořádat pokojný protest nebo natáčet vtipná videa na internet, dokud tím neporušují zákon. Naopak policista nebo úředník nesmí protest rozehnat ani nařídit smazání videa, pokud mu k tomu zákon nedává výslovné oprávnění a přesný postup.",
+  law:[["„Státní moc slouží všem občanům a lze ji uplatňovat jen v případech, v mezích a způsoby, které stanoví zákon. Každý občan může činit, co není zákonem zakázáno, a nikdo nesmí být nucen činit, co zákon neukládá.“","Ústava ČR, čl. 2 odst. 3 a 4"]]},
+ {id:"jistota", t:"Právní jistota", en:"legal certainty",
+  s:"Zákony jsou jasné, předvídatelné a neplatí zpětně.",
+  lead:"Zákony jsou jasné, předvídatelné a neplatí zpětně (zákaz retroaktivity).",
+  ex:"Když si otevřete malou kavárnu, hygienická a daňová pravidla jsou předem jasně daná. Zároveň vás nikdo nemůže potrestat za čin, který v době, kdy jste ho udělali, ještě nebyl žádným zákonem zakázaný.",
+  law:[["„Trestnost činu se posuzuje a trest se ukládá podle zákona účinného v době, kdy byl čin spáchán.“","Listina základních práv a svobod, čl. 40 odst. 6"]]},
+ {id:"delba", t:"Dělba moci", en:"separation of powers",
+  s:"Moc zákonodárná, výkonná a soudní se navzájem kontrolují.",
+  lead:"Moc zákonodárná, výkonná a soudní jsou oddělené a navzájem se kontrolují (checks and balances).",
+  ex:"Premiér nemůže sám přes noc přepsat trestní zákoník ani přikázat soudci, koho má poslat do vězení. Zákony totiž schvaluje parlament, vláda řídí stát a soudy kontrolují, zda oba dodržují právo.",
+  law:[["„Lid je zdrojem veškeré státní moci; vykonává ji prostřednictvím orgánů moci zákonodárné, výkonné a soudní.“","Ústava ČR, čl. 2 odst. 1"]]},
+ {id:"zneuziti", t:"Zákaz zneužívání moci", en:"no abuse of power",
+  s:"Politici nesmějí zneužívat úřad ani rušit základy demokracie.",
+  lead:"Zákaz překročení pravomoci: politici nesmějí zneužívat úřad a veřejné peníze pro sebe ani překračovat ústavní meze a rušit základy demokracie.",
+  ex:"Ministr nemůže použít peníze ze státního rozpočtu na zaplacení volebních billboardů své strany. Stejně tak si ani vládnoucí většina nemůže zneužitím moci odhlasovat, že ruší svobodné volby a stává se doživotním vládcem.",
+  law:[["„Změna podstatných náležitostí demokratického právního státu je nepřípustná. Výkladem právních norem nelze oprávnit odstranění nebo ohrožení základů demokratického státu.“","Ústava ČR, čl. 9 odst. 2 a 3"]]},
+ {id:"soudy", t:"Nezávislé soudy a spravedlivý proces", en:"independent courts & fair trial",
+  s:"Soudci rozhodují nestranně, každý má právo na obhajobu.",
+  lead:"Soudci rozhodují nestranně bez nátlaku politiků; každý má právo na obhajobu a přístup k soudu.",
+  ex:"Když zažalujete mocného místního politika nebo velkou banku za nezákonný poplatek, soudce rozhodne podle důkazů, nikoliv podle toho, kdo mu z vlády zatelefonuje. Pokud jste obviněni a nemáte peníze na právníka, stát vám v případech, které stanoví zákon, poskytne obhájce zdarma.",
+  law:[["„Soudní moc vykonávají jménem republiky nezávislé soudy. Soudci jsou při výkonu své funkce nezávislí. Jejich nestrannost nesmí nikdo ohrožovat.“","Ústava ČR, čl. 81 a 82"],["„Každý se může domáhat stanoveným postupem svého práva u nezávislého a nestranného soudu.“","Listina základních práv a svobod, čl. 36"]]},
+ {id:"rovnost", t:"Rovnost před zákonem", en:"equality before the law",
+  s:"Pravidla a práva platí pro všechny stejně.",
+  lead:"Pravidla a práva platí pro všechny stejně bez ohledu na majetek, původ, pohlaví, věk či víru (zákaz diskriminace).",
+  ex:"Když přijdete do veřejné nemocnice, dostanete péči podle svého zdravotního stavu, ne podle platu, pohlaví nebo národnosti. Stejně tak policie (ani její kamerové systémy) nesmí šikanovat vybranou skupinu obyvatel kvůli barvě pleti či původu.",
+  law:[["„Lidé jsou svobodní a rovní v důstojnosti i v právech. Základní práva a svobody se zaručují všem bez rozdílu pohlaví, rasy, barvy pleti, jazyka, víry a náboženství, politického či jiného smýšlení, národního nebo sociálního původu, příslušnosti k národnostní nebo etnické menšině, majetku, rodu nebo jiného postavení.“","Listina základních práv a svobod, čl. 1 a čl. 3"]]}
+];
+const prById = Object.fromEntries(PRINCIPLES.map((p,i)=>[p.id, {...p, n:i+1}]));
+
+const MAY = [
+ {who:"obcan", q:"Chceš natočit vtipné video o premiérovi a dát ho na internet.", a:"smi", why:"Občan smí vše, co zákon nezakazuje. Vtipkovat o politicích žádný zákon nezakazuje."},
+ {who:"stat", q:"Policista chce rozehnat pokojnou demonstraci, protože se mu nelíbí heslo na transparentu.", a:"nesmi", why:"Stát smí jen to, co mu zákon dovoluje. Žádný zákon policii nedovoluje rozehnat pokojné shromáždění kvůli názoru."},
+ {who:"obcan", q:"Chceš si obarvit vlasy na zeleno a jít tak ven.", a:"smi", why:"Žádný zákon to nezakazuje, takže nikdo nepotřebuje žádné povolení."},
+ {who:"stat", q:"Úřad po tobě chce poplatek, který nestanoví žádný zákon.", a:"nesmi", why:"Daně a poplatky lze ukládat jen na základě zákona (Listina, čl. 11 odst. 5)."},
+ {who:"stat", q:"Policista tě požádá o prokázání totožnosti v situaci, kdy mu to zákon o policii výslovně umožňuje.", a:"smi", why:"Stát smí to, co mu zákon dovoluje. Zákon o Policii ČR stanoví, kdy smí policista totožnost vyžadovat."},
+ {who:"obcan", q:"Chceš se spolužáky založit spolek fanoušků deskových her.", a:"smi", why:"Listina zaručuje právo svobodně se sdružovat a žádný zákon to nezakazuje."},
+ {who:"stat", q:"Ministerstvo chce zakázat prodej knihy, protože kritizuje vládu, ale žádný zákon mu to neumožňuje.", a:"nesmi", why:"Stát smí jen to, co mu zákon dovoluje. Listina navíc říká, že cenzura je nepřípustná (čl. 17 odst. 3)."},
+ {who:"obcan", q:"Chceš řídit auto bez řidičského průkazu, protože tě to baví.", a:"nesmi", why:"Občan smí vše, co zákon nezakazuje. Tohle ale zákon zakazuje, takže svoboda tady končí."}
+];
+
+const BREACH = [
+ {q:"Parlament přijme zákon, podle kterého budou potrestáni lidé, kteří loni sdíleli určitý příspěvek, i když to tehdy bylo legální.", a:"jistota", why:"Zákon nesmí platit zpětně (zákaz retroaktivity)."},
+ {q:"Zákon o daních je napsaný tak nejasně, že ani úředníci nevědí, kolik má kdo platit.", a:"jistota", why:"Zákony mají být jasné a předvídatelné."},
+ {q:"Vláda sama změní trestní zákoník svým nařízením, aniž by o tom hlasoval parlament.", a:"delba", why:"Zákony schvaluje parlament, ne vláda. Moc zákonodárná a výkonná mají být oddělené."},
+ {q:"Ministr zaplatí z peněz ministerstva reklamní kampaň své strany před volbami.", a:"zneuziti", why:"Veřejné peníze nesmí politik použít pro sebe ani pro svou stranu."},
+ {q:"Vládnoucí strana prosadí změnu ústavy, podle které se už nebudou konat volby.", a:"zneuziti", why:"Rušit základy demokracie je nepřípustné (Ústava, čl. 9 odst. 2)."},
+ {q:"Úředník odmítne vyřídit žádost, protože žadatel je Rom.", a:"rovnost", why:"Práva platí pro všechny bez rozdílu původu (zákaz diskriminace)."},
+ {q:"Bohatý podnikatel dostane za stejný přestupek nižší pokutu, protože zná starostu.", a:"rovnost", why:"Pravidla platí pro všechny stejně bez ohledu na majetek a známosti."},
+ {q:"Policie zakáže pokojnou demonstraci, aniž by jí to umožňoval jakýkoli zákon.", a:"zakonnost", why:"Stát smí jen to, co mu zákon dovoluje."},
+ {q:"Úřad pokutuje člověka za to, že nosí klobouk, ačkoli to žádný zákon nezakazuje.", a:"zakonnost", why:"Občan smí vše, co zákon nezakazuje, a stát smí trestat jen tam, kde mu to zákon dovoluje."},
+ {q:"Obviněný nesmí mluvit se svým obhájcem a nedozví se, jaké důkazy proti němu soud má.", a:"soudy", why:"Každý má právo na obhajobu a spravedlivý proces."},
+ {q:"Premiér zavolá soudci a naznačí mu, jak má rozhodnout v kauze jeho přítele.", a:"soudy", why:"Soudci mají rozhodovat nestranně a bez nátlaku politiků.", also:"delba"}
+];
+
+/* ============ 1. rule by / rule of law ============ */
+(function(){
+  const stack = document.getElementById("stack"), ex = document.getElementById("explain");
+  function render(mode, animate){
+    const m = MODES[mode];
+    stack.dataset.mode = mode;
+    document.getElementById("bRuler").textContent = m.ruler;
+    document.getElementById("bLaw").textContent = m.law;
+    document.getElementById("bPeople").textContent = m.people;
+    ex.innerHTML = `<div class="${animate ? "swap" : ""}"><h3>${esc(m.t)}</h3><p class="en">${esc(m.en)}</p>${m.text.map(t=>`<p>${esc(t)}</p>`).join("")}<p class="short">${esc(m.short)}</p></div>`;
+    document.querySelectorAll("#h-rule ~ .versus .seg button, .versus .seg button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.mode===mode));
+  }
+  document.querySelector(".versus .seg").addEventListener("click", e=>{ const b = e.target.closest("[data-mode]"); if (b) render(b.dataset.mode, true); });
+  render("by", false);
+})();
+
+/* ============ panel ============ */
+const panel = document.getElementById("panel"), scrim = document.getElementById("scrim"), pBody = document.getElementById("pBody");
+let lastTrigger = null;
+function showPrinciple(id, trigger){
+  const p = prById[id];
+  const prev = PRINCIPLES[(p.n + 4) % 6], next = PRINCIPLES[p.n % 6];
+  pBody.innerHTML = `<span class="badge">Princip ${p.n} z 6</span>
+    <h3 id="pTitle">${esc(p.t)}${p.alt ? ` / ${esc(p.alt)}` : ""}</h3><p class="en">${esc(p.en)}</p>
+    <p class="p-lead">${esc(p.lead)}</p>
+    <h4>Příklad</h4><div class="example"><p>${esc(p.ex)}</p></div>
+    <h4>Kde to stojí v Ústavě a Listině</h4>${p.law.map(l=>`<div class="lawbox"><p class="law">${esc(l[0])}<small>${esc(l[1])}</small></p></div>`).join('<div style="height:12px"></div>')}
+    <div class="pnav"><button data-pr="${prev.id}">‹ ${esc(prev.t)}</button><button data-pr="${next.id}">${esc(next.t)} ›</button></div>`;
+  pBody.scrollTop = 0;
+  if (!panel.classList.contains("open")) lastTrigger = trigger || document.activeElement;
+  panel.classList.add("open"); panel.setAttribute("aria-hidden","false"); scrim.classList.add("on");
+  pBody.focus({preventScroll:true});
+}
+function closePanel(){
+  panel.classList.remove("open"); panel.setAttribute("aria-hidden","true"); scrim.classList.remove("on");
+  if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
+}
+document.getElementById("pClose").onclick = closePanel;
+scrim.onclick = closePanel;
+document.addEventListener("keydown", e=>{ if (e.key==="Escape" && panel.classList.contains("open")) closePanel(); });
+document.addEventListener("click", e=>{ const b = e.target.closest("[data-pr]"); if (b) showPrinciple(b.dataset.pr, b.closest(".panel") ? null : b); });
+
+/* ============ principles grid ============ */
+document.getElementById("principles").innerHTML = PRINCIPLES.map((p,i)=>`
+  <li><button class="pr" data-pr="${p.id}"><span class="n">${i+1}</span><span class="t">${esc(p.t)}${p.alt ? ` / ${esc(p.alt)}` : ""}</span><span class="en">${esc(p.en)}</span><span class="s">${esc(p.s)}</span></button></li>`).join("");
+
+/* ============ quizzes ============ */
+function makeQuiz(root, items, opts){
+  const q = s => root.querySelector(s);
+  let deck = [], qi = 0, right = 0, done = 0, answered = false;
+  if (opts.buttons) q("[data-opts]").innerHTML = opts.buttons;
+  function ask(){
+    if (!deck.length || qi >= deck.length){ deck = shuffle(items.slice()); qi = 0; }
+    answered = false;
+    const it = deck[qi];
+    q("[data-q]").textContent = it.q;
+    q("[data-count]").textContent = `(${qi+1} z ${deck.length})`;
+    const who = q("[data-who]");
+    if (who){ who.textContent = it.who==="stat" ? "Stát" : "Občan"; who.className = "who " + it.who; }
+    root.querySelectorAll(".opt").forEach(o=>{ o.classList.remove("right","wrong"); o.disabled = false; });
+    q("[data-fb]").className = "feedback"; q("[data-fb]").innerHTML = ""; q("[data-next]").hidden = true;
+  }
+  q("[data-opts]").addEventListener("click", e=>{
+    const o = e.target.closest(".opt"); if (!o || answered) return;
+    answered = true;
+    const it = deck[qi], ok = o.dataset.v === it.a;
+    root.querySelectorAll(".opt").forEach(x=>{ x.disabled = true; if (x.dataset.v===it.a) x.classList.add("right"); });
+    if (!ok) o.classList.add("wrong");
+    done++; if (ok) right++;
+    q("[data-right]").textContent = right; q("[data-done]").textContent = done;
+    const fb = q("[data-fb]");
+    fb.className = "feedback show " + (ok ? "good" : "meh");
+    fb.innerHTML = opts.feedback(it, ok);
+    q("[data-next]").hidden = false; q("[data-next]").focus();
+  });
+  q("[data-next]").onclick = ()=>{ qi++; ask(); };
+  ask();
+}
+makeQuiz(document.getElementById("quizA"), MAY, {
+  feedback:(it, ok)=>`<strong>${ok ? "Správně." : (it.a==="smi" ? "Smí." : "Nesmí.")}</strong>${esc(it.why)}`
+});
+makeQuiz(document.getElementById("quizB"), BREACH, {
+  buttons: PRINCIPLES.map((p,i)=>`<button class="opt" data-v="${p.id}">${i+1}. ${esc(p.t)}</button>`).join(""),
+  feedback:(it, ok)=>{
+    const p = prById[it.a];
+    const also = it.also ? ` Souvisí to i s principem ${esc(prById[it.also].t.toLowerCase())}.` : "";
+    return `<strong>${ok ? "Správně." : `Porušen je princip ${p.n}: ${esc(p.t)}.`}</strong>${esc(it.why)}${also} <button class="linkbtn" data-pr="${p.id}">Více o principu</button>`;
+  }
+});
+</script>
+</body>
+</html>
