@@ -43,6 +43,14 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--crit);outline-offset:2px;border-radius:6px}
 .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
 
+/* ---------- site navigation ---------- */
+nav.site{border-bottom:1.5px solid var(--soft);background:var(--surface)}
+nav.site .wrap{display:flex;flex-wrap:wrap;gap:6px;padding-top:10px;padding-bottom:10px}
+nav.site a{color:var(--muted);text-decoration:none;font-weight:600;font-size:15px;padding:7px 13px;border-radius:9px}
+nav.site a:hover{color:var(--ink);background:var(--paper)}
+nav.site a[aria-current="page"]{color:var(--paper);background:var(--ink)}
+nav.site a span{font-weight:400;opacity:.75;margin-right:6px}
+
 /* ---------- header ---------- */
 header.top{padding-top:44px;padding-bottom:8px}
 .course{font-size:14px;color:var(--muted);margin:0 0 10px}
@@ -290,6 +298,13 @@ footer p{margin:4px 0;max-width:80ch}
 </style>
 </head>
 <body>
+
+<nav class="site" aria-label="Stránky">
+  <div class="wrap">
+    <a href="stat.html"><span>4.1</span>Stát a jeho funkce</a>
+    <a href="./" aria-current="page"><span>4.3</span>Formy vlády</a>
+  </div>
+</nav>
 
 <header class="top wrap">
   <p class="course">H-GLC, blok Demokracie a právní stát, hodina 4.3</p>

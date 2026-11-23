@@ -1,9 +1,14 @@
 # Politické systémy
 
-Interaktivní schéma forem vlády pro hodinu H-GLC 4.3 (Formy vlády, politické režimy).
+Interaktivní stránky k bloku H-GLC Demokracie a právní stát:
+
+- `stat.html`: hodina 4.1 Stát a jeho funkce (prvky státu, přirozený stav a společenská smlouva, funkce státu s procvičováním, legitimita)
+- `index.html`: hodina 4.3 Formy vlády (politické režimy)
+
+Formy vlády:
 
 - rozklikávací schéma: forma státu (monarchie, republika) a politický režim (demokracie, hybridní režim, autokracie) s podtypy
 - u každého pojmu definice, znaky, výhody a nevýhody a příklady států
 - procvičování: zařazení 26 států podle EIU Democracy Index 2025
 
-Celá stránka je v jediném souboru `index.html`.
+Každá stránka je jeden samostatný HTML soubor.
